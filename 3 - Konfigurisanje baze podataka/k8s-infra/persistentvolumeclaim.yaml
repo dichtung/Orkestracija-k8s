@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: catalyzator-mongodb-pvc
+spec: # Obzirom da nemam storage class, pvc ce da trazi od default-a tj docker-host sc da mu definira pvc
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  

@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: k8s-ingress-access-point
+  annotations:
+    #nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/enable-cors: "false"
+spec:
+  ingressClassName: nginx # needed for docker desktop, may be optional on remote cluster depending on setting
+  rules:
+  - host: www.ws-automation.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: catalyzator-fe-svc #Ime servisa definisanog nad frontend pod-ovima (kada se gadja ime kontrolera)
+            port:
+              number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: catalyzator-api-svc # Ime servisa definisanog nad api podovima
+            port:
+              number: 5900
+      

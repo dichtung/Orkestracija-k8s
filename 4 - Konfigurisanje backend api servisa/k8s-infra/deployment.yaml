@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalyzator-api-deployment
+spec:
+  selector:
+    matchLabels:
+      app: catalyzator-api-pods
+  replicas: 1 # tells deployment to run 3 pods matching the template of the pods
+  template:
+    metadata:
+      labels:
+        app: catalyzator-api-pods
+    spec:
+      containers:
+      - name: catalyzator-api
+        image: dichtung/k8s-catalyzator-api:1.0.0
+        ports:
+        - containerPort: 5900
+        env:
+        - name: DB_HOSTNAME
+          valueFrom:
+            configMapKeyRef:
+              name: catalyzator-api-properties #ime ConfigMap-e
+              key: db_hostname  #ime property-ja
+        - name: DB_USERNAME
+          value: ibis
+        - name: DB_PASSWORD
+          value: ibis123
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: catalyzator-api-properties #ime ConfigMap-e
+              key: db_port  #ime property-ja
+        - name: DB_AUTH
+          valueFrom:
+            configMapKeyRef:
+              name: catalyzator-api-properties #ime ConfigMap-e
+              key: db_auth  #ime property-ja

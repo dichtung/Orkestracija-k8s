@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalyzator-mongodb
+spec:
+  clusterIP: None
+  type: ClusterIP
+  selector:
+    app: catalyzator-mongodb
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017

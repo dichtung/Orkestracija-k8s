@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalyzator-fe-deployment
+spec:
+  selector:
+    matchLabels:
+      app: catalyzator-fe-pods
+  replicas: 2 # tells deployment to run 2 pods matching the template of the pods
+  template:
+    metadata:
+      labels:
+        app: catalyzator-fe-pods
+    spec:
+      containers:
+      - name: catalyzator-fe
+        image: dichtung/k8s-catalyzator-fe:1.0.0
+        ports:
+        - containerPort: 80
