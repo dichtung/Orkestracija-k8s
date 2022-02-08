@@ -22,18 +22,24 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: catalyzator-api-properties #ime ConfigMap-e
-              key: db_hostname  #ime property-ja
+              key: db_hostname  # ime property-ja
         - name: DB_USERNAME
-          value: ibis
+          valueFrom:
+            secretKeyRef:
+              name: catalyzator-api-secret # Ime secret-a
+              key: username # ime property-ja
         - name: DB_PASSWORD
-          value: ibis123
+          valueFrom:
+            secretKeyRef:
+              name: catalyzator-api-secret # Ime secret-a
+              key: password # ime property-ja
         - name: DB_PORT
           valueFrom:
             configMapKeyRef:
               name: catalyzator-api-properties #ime ConfigMap-e
-              key: db_port  #ime property-ja
+              key: db_port  # ime property-ja
         - name: DB_AUTH
           valueFrom:
             configMapKeyRef:
               name: catalyzator-api-properties #ime ConfigMap-e
-              key: db_auth  #ime property-ja
+              key: db_auth  # ime property-ja
